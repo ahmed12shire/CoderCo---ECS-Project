@@ -27,7 +27,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./Terraform
-        run: terraform init
+        run: terraform init -upgrade
 
       - name: Terraform Validate
         working-directory: ./Terraform
