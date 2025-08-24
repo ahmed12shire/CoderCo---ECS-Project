@@ -31,6 +31,11 @@ variable "subnet_id" {
   type        = list(string)
 }
 
+variable "vpc_security_group_ids" {
+  description = "List of VPC security group IDs to attach to EC2 instances"
+  type        = list(string)
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical

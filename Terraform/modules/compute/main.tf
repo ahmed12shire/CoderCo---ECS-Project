@@ -3,7 +3,7 @@ resource "aws_instance" "ecsproject" {
   ami           = local.instance_ami
   instance_type = var.instance_type
   subnet_id     = element(var.subnet_id, count.index % length(var.subnet_id))
-  vpc_security_group_ids = [module.vpc.public_sg_id]
+  vpc_security_group_ids = var.vpc_security_group_ids
 
   tags = merge(
     var.tags,
