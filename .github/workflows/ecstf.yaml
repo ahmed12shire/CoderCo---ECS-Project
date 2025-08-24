@@ -1,15 +1,16 @@
 name: ECS Project Terraform
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
-      destroy:
-        description: "Set to true to destroy all resources"
-        required: false
-        default: "false"
+      action:
+        description: "Choose Terraform action: apply or destroy"
+        required: true
+        default: "apply"
+        type: choice
+        options:
+          - apply
+          - destroy
 
 jobs:
   terraform:
@@ -36,26 +37,23 @@ jobs:
         run: terraform init -upgrade
 
       - name: Terraform Validate
-        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
         run: terraform validate
 
       - name: Terraform Format
-        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
         run: terraform fmt -recursive
 
       - name: Terraform Plan
-        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
         run: terraform plan -input=false
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event.inputs.destroy != 'true'
+        if: github.event.inputs.action == 'apply'
         working-directory: ./Terraform
         run: terraform apply -auto-approve -input=false
 
       - name: Terraform Destroy
-        if: github.event.inputs.destroy == 'true'
+        if: github.event.inputs.action == 'destroy'
         working-directory: ./Terraform
         run: terraform destroy -auto-approve -input=false
