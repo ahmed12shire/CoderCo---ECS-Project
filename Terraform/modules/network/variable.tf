@@ -66,5 +66,7 @@ locals {
 # zipmap
 locals {
   public_subnets_with_az = zipmap(keys(var.public_subnets), local.azs)
-  private_subnets_with_az = zipmap(keys(var.private_subnets), local.azs)
+  private_subnets_with_az = zipmap(
+    keys(var.private_subnets),
+    [for i in range(length(keys(var.private_subnets))) : local.azs[i % length(local.azs)] ]
 }
