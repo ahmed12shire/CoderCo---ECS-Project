@@ -1,0 +1,12 @@
+resource "aws_instance" "ecsproject" {
+  count         = var.instance_count
+  ami           = local.instance_ami
+  instance_type = var.instance_type
+  subnet_id     = element(var.subnet_id, count.index % length(var.subnet_id))
+  vpc_security_group_ids = [module.vpc.public_sg_id]
+
+  tags = merge(
+    var.tags,
+    { Name = "${var.tags.Project}-instance-${count.index + 1}" }
+  )
+}
