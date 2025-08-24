@@ -41,9 +41,9 @@ jobs:
         working-directory: ./Terraform
         env:
           TF_LOG: DEBUG
-        run: terraform plan -input=false -var-file=terraform.tfvars
+        run: terraform plan -input=false 
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         working-directory: ./Terraform
-        run: terraform apply -auto-approve -input=false -var-file=terraform.tfvars
+        run: terraform apply -auto-approve -input=false 
