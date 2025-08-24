@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      destroy:
+        description: "Set to true to destroy all resources"
+        required: false
+        default: "false"
 
 jobs:
   terraform:
@@ -41,9 +47,14 @@ jobs:
         working-directory: ./Terraform
         env:
           TF_LOG: DEBUG
-        run: terraform plan -input=false 
+        run: terraform plan -input=false
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
-        run: terraform apply -auto-approve -input=false 
+        run: terraform apply -auto-approve -input=false
+
+      - name: Terraform Destroy
+        if: github.event.inputs.destroy == 'true'
+        working-directory: ./Terraform
+        run: terraform destroy -auto-approve -input=false
