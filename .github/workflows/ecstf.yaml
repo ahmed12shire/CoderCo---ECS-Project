@@ -35,7 +35,7 @@ jobs:
 
       - name: Terraform Format
         working-directory: ./Terraform
-        run: terraform fmt -check
+        run: terraform fmt -recursive
 
       - name: Terraform Plan (debug)
         working-directory: ./Terraform
