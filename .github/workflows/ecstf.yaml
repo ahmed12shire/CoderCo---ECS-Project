@@ -36,17 +36,18 @@ jobs:
         run: terraform init -upgrade
 
       - name: Terraform Validate
+        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
         run: terraform validate
 
       - name: Terraform Format
+        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
         run: terraform fmt -recursive
 
-      - name: Terraform Plan (debug)
+      - name: Terraform Plan
+        if: github.event.inputs.destroy != 'true'
         working-directory: ./Terraform
-        env:
-          TF_LOG: DEBUG
         run: terraform plan -input=false
 
       - name: Terraform Apply
