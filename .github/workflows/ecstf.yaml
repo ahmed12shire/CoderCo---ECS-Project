@@ -1,16 +1,9 @@
 name: ECS Project Terraform
 
 on:
-  workflow_dispatch:
-    inputs:
-      action:
-        description: "Choose Terraform action: apply or destroy"
-        required: true
-        default: "apply"
-        type: choice
-        options:
-          - apply
-          - destroy
+  push:
+    branches:
+      - main
 
 jobs:
   terraform:
@@ -44,16 +37,13 @@ jobs:
         working-directory: ./Terraform
         run: terraform fmt -recursive
 
-      - name: Terraform Plan
+      - name: Terraform Plan (debug)
         working-directory: ./Terraform
-        run: terraform plan -input=false
+        env:
+          TF_LOG: DEBUG
+        run: terraform plan -input=false 
 
       - name: Terraform Apply
-        if: github.event.inputs.action == 'apply'
+        if: github.ref == 'refs/heads/main'
         working-directory: ./Terraform
-        run: terraform apply -auto-approve -input=false
-
-      - name: Terraform Destroy
-        if: github.event.inputs.action == 'destroy'
-        working-directory: ./Terraform
-        run: terraform destroy -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false 
