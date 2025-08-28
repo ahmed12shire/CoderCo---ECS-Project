@@ -35,3 +35,11 @@ variable "target_group_arn" {
   description = "Target group ARN for load balancer"
 }
 
+
+locals {
+  common_tags = {
+    Project = var.project_name
+    Owner   = "devOps-Team"
+    Env     = "dev"
+  }
+}

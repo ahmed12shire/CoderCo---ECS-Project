@@ -17,5 +17,4 @@ resource "aws_route53_record" "alb_record" {
     evaluate_target_health = true
   }
 
-  ttl = 300
 }
