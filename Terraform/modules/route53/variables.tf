@@ -7,3 +7,9 @@ variable "project_name" {
   description = "The name of the project (used for naming resources)"
   type        = string
 }
+
+
+variable "alb_dns_name" {
+  description = "ALB DNS name"
+  type        = string
+}

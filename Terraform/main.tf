@@ -32,6 +32,7 @@ module "alb" {
 
 module "route53" {
   source = "./modules/route53"
+  project_name    = var.project_name
   domain_name = var.domain_name
   alb_dns_name = module.alb.alb_dns_name
 }
