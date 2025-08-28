@@ -33,11 +33,7 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = 2
   launch_type     = "EC2"  # Running on EC2 instances
-  network_configuration {
-    subnets          = var.subnet_ids
-    security_groups = var.security_group_ids
-    assign_public_ip = true
-  }
+  
 
   load_balancer {
     target_group_arn = var.target_group_arn
@@ -45,5 +41,5 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = 3000
   }
 
- 
+  depends_on = [aws_lb_listener.http]
 }
