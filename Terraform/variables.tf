@@ -9,7 +9,7 @@ variable "region" {
 }
 
 variable "domain_name" {
-  description = "Domain name registered with Route 53 (e.g., example.com)"
+  description = "Domain name registered with Route 53"
   type        = string
 }
 
@@ -23,16 +23,6 @@ variable "instance_count" {
   description = "Number of EC2 instances to create"
   type        = number
   default     = 2
-}
-
-variable "subnet_id" {
-  description = "Subnet ID for EC2 instances"
-  type        = list(string)
-}
-
-variable "vpc_security_group_ids" {
-  description = "VPC security group IDs for EC2 instances"
-  type        = list(string)
 }
 
 variable "repository_name" {
