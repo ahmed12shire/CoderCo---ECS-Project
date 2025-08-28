@@ -16,7 +16,6 @@ module "ec2" {
 
 module "ecs_cluster" {
   source = "./modules/cluster"
-  cluster_name = var.project_name
 }
 
 module "ecr" {
