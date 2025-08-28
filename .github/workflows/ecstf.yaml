@@ -37,16 +37,27 @@ jobs:
         working-directory: ./Terraform
         run: terraform fmt -recursive
 
-      - name: Terraform Plan (debug)
+      - name: Terraform Plan
         working-directory: ./Terraform
-        env:
-          TF_LOG: DEBUG
-        run: terraform plan -input=false 
+        run: |
+          terraform plan -input=false \
+            -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" \
+            -var="aws_region=${{ secrets.AWS_REGION }}" \
+            -var="image_tag=${{ secrets.IMAGE_TAG }}" \
+            -var="repository_name=${{ secrets.ECR_REPOSITORY }}" \
+            -var="domain_name=${{ secrets.DOMAIN_NAME }}"
+ 
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         working-directory: ./Terraform
-        run: terraform apply -auto-approve -input=false 
+        run: |
+          terraform apply -auto-approve -input=false \
+            -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" \
+            -var="aws_region=${{ secrets.AWS_REGION }}" \
+            -var="image_tag=${{ secrets.IMAGE_TAG }}" \
+            -var="repository_name=${{ secrets.ECR_REPOSITORY }}" \
+            -var="domain_name=${{ secrets.DOMAIN_NAME }}"
 
 
 

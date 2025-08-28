@@ -7,7 +7,7 @@ resource "aws_route53_zone" "main" {
 }
 
 resource "aws_route53_record" "alb_record" {
-  zone_id = var.app_lb_zone_id
+  zone_id = aws_route53_zone.main.zone_id 
   name    = var.domain_name
   type    = "A"
 
