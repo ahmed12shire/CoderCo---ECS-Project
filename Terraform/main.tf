@@ -16,6 +16,14 @@ module "ec2" {
 
 module "ecs_cluster" {
   source = "./modules/cluster"
+  project_name           = var.project_name
+  image_tag              = var.image_tag
+  ecs_execution_role_arn = aws_iam_role.ecs_execution_role.arn
+  ecs_task_role_arn      = aws_iam_role.ecs_task_role.arn
+  ecr_repository_url     = module.ecr.ecr_repository_url
+  subnet_ids             = module.vpc.public_subnet_ids
+  security_group_ids     = [module.vpc.public_sg_id]
+  target_group_arn      = module.alb.app_target_group_arn
 }
 
 module "ecr" {
@@ -35,4 +43,5 @@ module "route53" {
   project_name    = var.project_name
   domain_name = var.domain_name
   alb_dns_name = module.alb.alb_dns_name
+  app_lb_zone_id = module.alb.app_lb_zone_id
 }

@@ -13,3 +13,8 @@ variable "alb_dns_name" {
   description = "ALB DNS name"
   type        = string
 }
+
+variable "app_lb_zone_id" {
+  type        = string
+  description = "ALB hosted zone ID"
+}

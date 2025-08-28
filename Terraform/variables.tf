@@ -39,3 +39,18 @@ variable "repository_name" {
   description = "The name of the ECR repository"
   type        = string
 }
+
+variable "aws_account_id" {
+  type        = string
+  description = "AWS Account ID"
+}
+
+variable "aws_region" {
+  type        = string
+  description = "AWS Region"
+}
+
+variable "image_tag" {
+  type        = string
+  description = "Docker image tag"
+}
