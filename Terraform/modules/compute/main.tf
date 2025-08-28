@@ -5,6 +5,8 @@ resource "aws_instance" "ecsproject" {
   subnet_id     = element(var.subnet_id, count.index % length(var.subnet_id))
   vpc_security_group_ids = var.vpc_security_group_ids
 
+
+  
   tags = merge(
     var.tags,
     { Name = "${var.tags.Project}-instance-${count.index + 1}" }

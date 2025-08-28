@@ -36,6 +36,27 @@ variable "vpc_security_group_ids" {
   type        = list(string)
 }
 
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "aws_account_id" {
+  description = "AWS Account ID"
+  type        = string
+}
+
+variable "ecr_repository" {
+  description = "ECR repository name"
+  type        = string
+}
+
+variable "image_tag" {
+  description = "Docker image tag"
+  type        = string
+}
+
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
