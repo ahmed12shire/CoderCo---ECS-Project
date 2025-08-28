@@ -34,12 +34,8 @@ resource "aws_lb_listener" "http" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "fixed-response"
-    fixed_response {
-      status_code = 200
-      message_body = "OK"
-      content_type = "text/plain"
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app_target_group.arn
   }
 }
 
