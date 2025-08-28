@@ -2,8 +2,8 @@ resource "aws_lb" "app_lb" {
   name               = "${var.project_name}-app-lb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.public_sg.id]
-  subnets            = module.vpc.public_subnet_ids
+  security_groups    = var.security_group_ids 
+  subnets            = var.public_subnet_ids
   enable_deletion_protection = false
 
   tags = merge(local.common_tags, {

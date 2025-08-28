@@ -14,12 +14,16 @@ module "ec2" {
     image_tag              = var.image_tag
 }
 
+module "iam" {
+  source = "./modules/iam"
+}
+
 module "ecs_cluster" {
   source = "./modules/cluster"
   project_name           = var.project_name
   image_tag              = var.image_tag
-  ecs_execution_role_arn = aws_iam_role.ecs_execution_role.arn
-  ecs_task_role_arn      = aws_iam_role.ecs_task_role.arn
+  ecs_execution_role_arn = module.iam.ecs_execution_role_arn
+  ecs_task_role_arn      = module.iam.ecs_execution_role_arn
   ecr_repository_url     = module.ecr.ecr_repository_url
   subnet_ids             = module.vpc.public_subnet_ids
   security_group_ids     = [module.vpc.public_sg_id]
@@ -36,6 +40,7 @@ module "alb" {
   source = "./modules/alb"
   vpc_id = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
+  security_group_ids = [module.vpc.public_sg_id]
 }
 
 module "route53" {
