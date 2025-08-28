@@ -1,3 +1,7 @@
+variable "project_name" {
+  description = "Project name used for naming resources"
+  type        = string
+}
 
 variable "vpc_id" {
   description = "VPC ID where the ALB will be deployed"
@@ -11,4 +15,13 @@ variable "public_subnet_ids" {
 
 variable "security_group_ids" {
   type = list(string)
+}
+
+
+locals {
+  common_tags = {
+    Project = var.project_name
+    Owner   = "DevOps-Team"
+    Env     = "dev"
+  }
 }
