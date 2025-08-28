@@ -8,10 +8,14 @@ module "ec2" {
     source     = "./modules/compute"
     subnet_id  = module.vpc.public_subnet_ids 
     vpc_security_group_ids = [module.vpc.public_sg_id]
+    aws_account_id         = var.aws_account_id
+    aws_region             = var.aws_region
+    ecr_repository         = module.ecr.ecr_repository_url   
+    image_tag              = var.image_tag
 }
 
 module "ecs_cluster" {
-  source = "./modules/compute"
+  source = "./modules/cluster"
   cluster_name = var.project_name
 }
 
