@@ -34,3 +34,8 @@ variable "vpc_security_group_ids" {
   description = "VPC security group IDs for EC2 instances"
   type        = list(string)
 }
+
+variable "repository_name" {
+  description = "The name of the ECR repository"
+  type        = string
+}
