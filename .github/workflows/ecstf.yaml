@@ -65,7 +65,14 @@ jobs:
 
 # --- Docker Build and Push to ECR ---
       - name: Login to Amazon ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Debug environment values
+        run: |
+          echo "ECR_REPOSITORY=${{ secrets.ECR_REPOSITORY }}"
+          echo "IMAGE_TAG=${{ secrets.IMAGE_TAG }}"
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}"  
 
       - name: Build Docker image
         run: |
