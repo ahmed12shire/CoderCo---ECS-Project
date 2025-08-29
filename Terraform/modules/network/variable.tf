@@ -46,6 +46,7 @@ variable "public_sg_ingress" {
     ssh   = { from = 22, to = 22, protocol = "tcp" }
     http  = { from = 80, to = 80, protocol = "tcp" }
     https = { from = 443, to = 443, protocol = "tcp" }
+
   }
 }
 
