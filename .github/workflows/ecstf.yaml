@@ -68,12 +68,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Debug environment values
-        run: |
-          echo "ECR_REPOSITORY=${{ secrets.ECR_REPOSITORY }}"
-          echo "IMAGE_TAG=${{ secrets.IMAGE_TAG }}"
-          echo "AWS_REGION=${{ secrets.AWS_REGION }}"  
-
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }} .
