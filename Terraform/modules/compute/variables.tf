@@ -84,6 +84,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 locals {
-    instance_ami = data.aws_ssm_parameter.ecs_ami.id
+    instance_ami = data.aws_ssm_parameter.ecs_ami.value
 }
 
