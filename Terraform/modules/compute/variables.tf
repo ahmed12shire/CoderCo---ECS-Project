@@ -56,6 +56,10 @@ variable "image_tag" {
   type        = string
 }
 
+variable "ecs_instance_role_name" {
+  description = "The name of the IAM role to associate with the EC2 instance"
+  type        = string
+}
 
 data "aws_ami" "ubuntu" {
   most_recent = true

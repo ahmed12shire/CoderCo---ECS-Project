@@ -12,6 +12,7 @@ module "ec2" {
     aws_region             = var.aws_region
     ecr_repository         = module.ecr.ecr_repository_url   
     image_tag              = var.image_tag
+    ecs_instance_role_name = module.iam.ecs_instance_role_name
 }
 
 module "iam" {
