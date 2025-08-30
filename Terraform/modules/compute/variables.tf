@@ -66,7 +66,7 @@ variable "ecs_user_data" {
   description = "User data script for ECS instances"
   default     = <<-EOT
                 #!/bin/bash
-                echo ECS_CLUSTER=${var.project_name}-cluster >> /etc/ecs/ecs.config
+                echo ECS_CLUSTER=ecs-project-cluster >> /etc/ecs/ecs.config
                 EOT
 }
 
