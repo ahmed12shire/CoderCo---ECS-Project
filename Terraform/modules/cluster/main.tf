@@ -7,7 +7,7 @@ resource "aws_ecs_task_definition" "task" {
   network_mode             = "bridge"  # Use EC2 instances
   requires_compatibilities = ["EC2"]
   cpu                      = "256"
-  memory                   = "512"
+  memory                   = "256"
   execution_role_arn       = var.ecs_execution_role_arn
   task_role_arn            = var.ecs_task_role_arn
 
