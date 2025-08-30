@@ -5,7 +5,7 @@ resource "aws_instance" "ecsproject" {
   subnet_id     = element(var.subnet_id, count.index % length(var.subnet_id))
   vpc_security_group_ids = var.vpc_security_group_ids
 
-  iam_instance_profile = var.ecs_instance_role_name
+  iam_instance_profile = var.ecs_instance_profile_name
 
 
   

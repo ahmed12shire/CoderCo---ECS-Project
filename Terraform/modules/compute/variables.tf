@@ -61,6 +61,11 @@ variable "ecs_instance_role_name" {
   type        = string
 }
 
+variable "ecs_instance_profile_name" {
+  description = "The name of the IAM instance profile to associate with the EC2 instance"
+  type        = string
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
