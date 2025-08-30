@@ -56,16 +56,24 @@ variable "image_tag" {
   type        = string
 }
 
-# variable "ecs_instance_role_name" {
-#   description = "The name of the IAM role to associate with the EC2 instance"
-#   type        = string
-# }
-
 variable "ecs_instance_profile_name" {
   description = "The name of the IAM instance profile to associate with the EC2 instance"
   type        = string
 }
 
+variable "ecs_user_data" {
+  type        = string
+  description = "User data script for ECS instances"
+  default     = <<-EOT
+                #!/bin/bash
+                echo ECS_CLUSTER=${var.project_name}-cluster >> /etc/ecs/ecs.config
+                EOT
+}
+
+# Get latest ECS-optimized AMI ID from SSM
+data "aws_ssm_parameter" "ecs_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
+}
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
@@ -76,6 +84,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 locals {
-    instance_ami = data.aws_ami.ubuntu.id
+    instance_ami = data.aws_ssm_parameter.ecs_ami.id
 }
 
