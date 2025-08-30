@@ -67,6 +67,7 @@ variable "ecs_user_data" {
   default     = <<-EOT
                 #!/bin/bash
                 echo ECS_CLUSTER=ecs-project-cluster >> /etc/ecs/ecs.config
+                systemctl restart ecs
                 EOT
 }
 

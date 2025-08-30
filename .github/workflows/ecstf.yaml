@@ -63,20 +63,20 @@ jobs:
 
 
 
-# --- Docker Build and Push to ECR ---
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+# # --- Docker Build and Push to ECR ---
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }} .
-          docker tag ${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }} \
-            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}
+#       - name: Build Docker image
+#         run: |
+#           docker build -t ${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }} .
+#           docker tag ${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }} \
+#             ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}
 
-      - name: Push to ECR
-        run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}
+#       - name: Push to ECR
+#         run: |
+#           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}
 
 
   # destroy:
