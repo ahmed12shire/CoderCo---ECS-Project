@@ -19,14 +19,14 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_role_policy" {
   role       = aws_iam_role.ecs_execution_role.name
 }
 
-# ECS Task Role (for ECS tasks to interact with AWS service
+# ECS Task Role (for ECS tasks to interact with AWS services)
 resource "aws_iam_role" "ecs_task_role" {
   name               = "ecs-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_assume_role_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_task_role_policy" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceTaskRolePolicy"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"  # Correct policy for ECS tasks
   role       = aws_iam_role.ecs_task_role.name
 }
 
@@ -35,7 +35,7 @@ resource "aws_iam_role" "ecs_instance_role" {
   name               = "ecsInstanceRole"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{
+    Statement = [ {
       Action    = "sts:AssumeRole"
       Principal = { Service = "ec2.amazonaws.com" }
       Effect    = "Allow"
@@ -49,5 +49,8 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_policy" {
   role       = aws_iam_role.ecs_instance_role.name
 }
 
-
-
+# Create an IAM Instance Profile for the EC2 instance role
+resource "aws_iam_instance_profile" "ecs_instance_profile" {
+  name = "ecsInstanceRoleProfile"
+  role = aws_iam_role.ecs_instance_role.name
+}
