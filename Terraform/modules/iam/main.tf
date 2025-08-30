@@ -49,6 +49,12 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_policy" {
   role       = aws_iam_role.ecs_instance_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "ecs_instance_ssm_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.ecs_instance_role.name
+}
+
+
 # Create an IAM Instance Profile for the EC2 instance role
 resource "aws_iam_instance_profile" "ecs_instance_profile" {
   name = "ecsInstanceRoleProfile"
