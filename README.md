@@ -1,3 +1,5 @@
+![ECS Architecture](./ecs-architecture.png)
+
 🏗️ Infrastructure Workflow
 1.	Networking
 	Creates VPC, subnets (public/private), Internet Gateway, NAT Gateway, and routing.
