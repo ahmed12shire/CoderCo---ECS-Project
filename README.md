@@ -43,3 +43,5 @@ ________________________________________
 •	Terraform: Modular IaC
 •	GitHub Actions: CI/CD automation
 •	Docker: Containerized application
+
+![Threat Composer](./threat-composer.png)
