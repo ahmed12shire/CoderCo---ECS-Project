@@ -1,4 +1,4 @@
-![ECS Architecture](./ecs-architecture.png)
+![ECS Architecture](./architecture diagram.png)
 
 🏗️ Infrastructure Workflow
 1.	Networking
