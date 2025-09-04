@@ -1,4 +1,4 @@
-![Architecture Diagram](./architecture_diagram.png)
+![Architecture Diagram](./architecture-diagram.png)
 
 🏗️ Infrastructure Workflow
 1.	Networking
